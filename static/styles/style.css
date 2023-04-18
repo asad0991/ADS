@@ -1,0 +1,191 @@
+html, body{
+  font-family: 'Jost', sans-serif;
+  background-color: #295b63a1;
+  color:#FFF;
+  height:100%;
+  margin:0;
+  text-align: center;
+}
+body{
+  display: flex;
+}
+h3{
+  font-size:2rem;
+}
+input{
+  width: 13rem;
+height: 2.5rem;
+border-radius: 12px;
+margin-bottom: 1.5rem;
+}
+button{
+  background: white;
+border: none;
+width: 8rem;
+height: 2rem;
+border-radius: 25px;
+margin: 0% 20%;
+font-size: large;
+}
+.login-wrapper{
+  display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    width:100%;
+    margin-top: 6%;
+}
+.login{
+  box-shadow: 5px 20px 50px #000;
+  padding:0rem 3rem;
+  border-radius: 25px;
+  height: 27rem;
+  overflow: hidden;
+  background-color: #295b63;
+  transition:1s;
+}
+.heading{
+
+  padding-top:1rem;
+}
+.login-heading{
+  text-align: center;
+    font-size: 1.5rem;
+    margin-block-end: 1rem;
+    color:#fff;
+}
+.login-form{
+      margin-bottom: 2rem;
+}
+.nullify-button-style{
+  background:transparent;
+
+}
+.signup{
+  color:#295b63;
+  background-color: #fff;
+  border-radius: 25px;
+  transition:1s;
+}
+.signup-heading{
+  text-align: center;
+    font-size: 1.5rem;
+    margin-block-end: 1rem;
+    color:#295b63;
+    cursor:pointer;
+}
+.signupbutton{
+  border: #295b63 solid 2px;
+}
+.signup-form{
+  padding-bottom: 2rem;
+}
+.login-button{
+  margin-bottom:2rem;
+}
+.nav-bar{
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding-top:1rem;
+  padding-bottom:1rem;
+  background-color: #fff;
+  box-shadow: 1px 0px 50px #000;
+}
+.nav-bar-item{
+  text-decoration: none;
+  font-size:large;
+  color:#295b63;
+  align-self: center;
+  max-width: 150px;
+}
+.logo{
+  width:150px;
+}
+.mobile{
+  padding: 0;
+  display: grid;
+  justify-content: center;
+  height: 100%;
+  display: grid;
+  transition: 0.5s;
+  width:0%;
+  z-index:1;
+}
+.toggle{
+  display: none;
+  text-decoration: none;
+  font-size:large;
+  color:#295b63;
+  align-self: center;
+
+}
+.toggle2{
+  display:none;
+}
+.mobile-inner{
+  display: grid;
+    height: 40%;
+}
+#x-button{
+  display: none;
+}
+.dummy{
+  display:none;
+
+}
+
+
+video {
+  width: 35rem;
+  height: 25rem;
+  background-color: #000;
+  margin-top:10rem;
+}
+.videooptions{
+  display:flex;
+  justify-content:space-between;
+  margin-top:1rem;
+  margin-right: 2.5rem;
+    margin-left: 2.5rem;
+}
+.Download{
+  margin-right: 0;
+    margin-left: 0;
+    color: #295b63;
+  cursor:pointer;
+}
+.video-title{
+  font-size:larger;
+}
+@media screen and (max-width:767px) {
+
+  .nav-bar-item{
+    display:none;
+  }
+  .logo-ref{
+    display:block;
+  }
+  .toggle2{
+    display: block;
+  }
+  .dummy{
+    display:block;
+  }
+  video{
+    width:15rem;
+    margin-top:10rem;
+  }
+  .videooptions{
+    display:grid;
+  }
+  .Download{
+  margin-top:0.5rem;
+  }
+
+}
+.video-container {
+    max-width: 640px;
+    margin: 0 auto;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/scripts.js') }}" charset="utf-8"></script>
+
+    <title></title>
+  </head>
+  <body ng-app="myApp" ng-controller="myCtrl" style="display:block">
+    <div class="nav-bar">
+      <a id="menu-button" onclick="menuclick()" class="toggle2" href="#" style="align-self: center; height:fit-content" > <img style="height:25px" src="{{ url_for('static', filename='menu-icon.png') }}" alt=""> </a>
+
+      <a class="nav-bar-item"style="width:130.08px" href="upload.html">Upload</a>
+      <a href="#" class="logo-ref nav-bar-item" > <img class="logo" src="{{ url_for('static', filename='logo.png') }}" alt=""> </a>
+      <a class="nav-bar-item" href="#">Download / Play</a>
+      <div class="dummy" style="width:25px;">
+
+      </div>
+
+    </div>
+
+    <div id="mobile" class="nav-bar mobile">
+      <a id="x-button" onclick="menuoff()" class="toggle2" href="#" style="height:fit-content; padding-top:2rem;" > <img style="height:25px" src="{{ url_for('static', filename='x.png') }}" alt=""> </a>
+      <div class="mobile-inner">
+      <a class="toggle" href="#">Home</a>
+      <a class="toggle" href="#">Upload</a>
+      <a class="toggle" href="#">Download / Play</a>
+
+
+      </div>
+
+    </div>
+    <div class="video-container">
+
+       <video controls>
+           <source src="{{ url_for('static', filename='dubbed/'+videoname) }}" type="video/mp4">
+           Your browser does not support the video tag.
+       </video>
+      <div class="videooptions">
+     <span class="video-title">{{videoname}}</span>
+     <button ng-click="downloadvideo('{{videoname}}')" class="Download" type="button" name="button">Download</button>
+   </div>
+   </div>
+
+  </body>
+</html>

@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="static/styles/style.css">
+    <script src="static/scripts/scripts.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <title>Automatic Dubbing Software</title>
+  </head>
+  <body>
+<div class="nav-bar">
+  <a id="menu-button" onclick="menuclick()" class="toggle2" href="#" style="align-self: center; height:fit-content" > <img style="height:25px" src="static/menu-icon.png" alt=""> </a>
+
+  <a class="nav-bar-item"style="width:130.08px" href="{{url_for('upload_form')}}">Upload</a>
+  <a href="#" class="logo-ref nav-bar-item" > <img class="logo" src="static/logo.png" alt=""> </a>
+  <a class="nav-bar-item" href="#">Download / Play</a>
+  <div class="dummy" style="width:25px;">
+
+  </div>
+
+</div>
+
+<div id="mobile" class="nav-bar mobile">
+  <a id="x-button" onclick="menuoff()" class="toggle2" href="#" style="height:fit-content; padding-top:2rem;" > <img style="height:25px" src="static/x.png" alt=""> </a>
+  <div class="mobile-inner">
+  <a class="toggle" href="#">Home</a>
+  <a class="toggle" href="#">Upload</a>
+  <a class="toggle" href="#">Download / Play</a>
+
+
+  </div>
+</div>
+    <div class="login-wrapper">
+
+
+          <h1> Your video will be dubbed shortly</h1>
+
+      </div>
+    </div>
+
+  </div>
+  </body>
+</html>

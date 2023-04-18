@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles/style.css">
+    <script src="static/scripts/scripts.js" charset="utf-8"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+
+    html,body{
+      margin:0;
+      border:0;
+      background-color: #3d6b72;
+    }
+
+      .topnav{
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+        background-color:white;
+  	background-color:white;
+      }
+      .body1{
+        display:flex;
+        justify-content:center;
+      }
+p{
+  text-align:center;
+  color:white;
+  font-size:30px;
+}
+input{
+  border: 2px;
+  padding: 10px;
+  border-radius: 25px;
+    cursor:pointer;
+}
+select{
+  border: 2px;
+  padding: 10px;
+  border-radius: 25px;
+    cursor:pointer;
+    margin:10px;
+}
+.original{
+  margin-right:1.5rem;
+}
+.target{
+  margin-left:2rem;
+  margin-right:1rem;
+}
+.link{
+  margin-right:1.5rem;
+}
+.margin-add{
+  margin:0;
+}
+@media screen and (max-width: 900px)  {
+  .margin-add{
+    margin-top:25%;
+  }
+  .topnav{font-size: 25px; }
+  .target,input,.original,.link{font-size: 15px; margin: 0; margin-bottom:5px;}
+  p{font-size: 25px; }
+  .body1{
+    display: grid;
+    height: 5rem;
+
+  }
+  option{
+    font-size: 20px;
+  }
+  .link{
+    width:80%;
+    margin-left:7%;
+  }
+  .input{
+    width:60%;
+    margin-left:20%;
+  }
+}
+.topnav{display:none}
+.button{
+  width:7rem;
+}
+    </style>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body style="display:block">
+    <div class="nav-bar">
+      <a id="menu-button" onclick="menuclick()" class="toggle2" href="#" style="align-self: center; height:fit-content" > <img style="height:25px" src="static/menu-icon.png" alt=""> </a>
+
+      <a class="nav-bar-item"style="width:130.08px" href="#">Upload</a>
+      <a href="{{url_for('index')}}" class="logo-ref nav-bar-item" > <img class="logo" src="static/logo.png" alt=""> </a>
+      <a class="nav-bar-item" href="#">Download / Play</a>
+      <div class="dummy" style="width:25px;">
+
+      </div>
+
+    </div>
+
+    <div id="mobile" class="nav-bar mobile">
+      <a id="x-button" onclick="menuoff()" class="toggle2" href="#" style="height:fit-content; padding-top:2rem;" > <img style="height:25px" src="static/x.png" alt=""> </a>
+      <div class="mobile-inner">
+      <a class="toggle" href="#">Home</a>
+      <a class="toggle" href="#">Upload</a>
+      <a class="toggle" href="#">Download / Play</a>
+      </div>
+    </div>
+<div class="main">
+<br>
+<p><b>Provide the video</b></p>
+<p>Upload the video you would like to get Dubbed</p>
+    <form method="post" action="/" enctype="multipart/form-data">
+<div class="body1">
+      <select id="original" name="original" required>
+        <option class="or" value="">Original Language</option>
+          <option value="en-US">English</option>
+        <option value="yue-Hant-HK">Chinese</option>
+        <option value="ur-PK">Urdu</option>
+        <option value="ru-RU">Russian</option>
+      </select>
+      <select id="target" name="target" required>
+        <option class="or" value="">Target Language</option>
+        <option value="yue-HK-Standard-B">Chinese</option>
+        <option value="hi-IN-Standard-B">Hindi</option>
+        <option value="ru-RU-Standard-B">Russian</option>
+          <option value="en-GB-Standard-D">English</option>
+      </select>
+      </div>
+      <br>
+
+<div class="body1">
+
+
+    <br>
+
+		<p style="margin: 1rem;">
+			<input style="width: 12.5rem" type="file" name="file" autocomplete="off" accept=".mp4" required>
+		</p>
+        <input style="margin-top:15px;" class=" button input" type="submit" value="Upload Video">
+
+
+</div>
+         </form>
+
+  <p class="margin-add" ><b>OR</b></p>
+  <p>Provide YouTube link of Video</p>
+  <form method="post" action="/" enctype="multipart/form-data">
+    <div class="body1" style="margin-bottom: 10px;">
+      <select id="original1" name="original" required>
+        <option class="or" value="">Original Language</option>
+          <option value="en-US">English</option>
+        <option value="yue-Hant-HK">Chinese</option>
+        <option value="ur-PK">Urdu</option>
+        <option value="ru-RU">Russian</option>
+      </select>
+      <select id="target1" name="target" required>
+        <option class="or" value="">Target Language</option>
+        <option value="yue-HK-Standard-B">Chinese</option>
+        <option value="hi-IN-Standard-B">Hindi</option>
+        <option value="ru-RU-Standard-B">Russian</option>
+          <option value="en-GB-Standard-D">English</option>
+      </select>
+      </div>
+  <div class="body1" id="1">
+ <input style="padding:0 0 0 10px;" class="link" value="" id="txt-url" name="#" type="text" placeholder="Provide URL Here">
+<input class=" button input" type="submit" value="Submit">
+  </div>
+  </form>
+</div>
+  </body>
+</html>
