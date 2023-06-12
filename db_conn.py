@@ -2,6 +2,7 @@ import mysql.connector
 import random
 import string
 import emailpart
+from flask import jsonify
 def generate_hex_string(length):
     return ''.join(random.choices(string.hexdigits, k=length))
 
@@ -60,3 +61,63 @@ def get_video(video_id):
 
     f.close()
     return data[1]
+
+def user_sign_up(email,name,phone,password, country):
+    print("hello")
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        database="video_dubbing",
+    )
+    print("Connection established .... i guess")
+    cursor = db.cursor()
+    sql = "INSERT INTO users ( NAME,EMAIL, PASSWORD,PHONE_NO, COUNTRY) VALUES (%s,%s,%s, %s, %s)"
+    params = (name, email, password, phone, country)
+
+    # create a cursor object and execute the statement
+
+    cursor.execute(sql, params)
+    db.commit()
+    cursor.close()
+    db.close()
+
+def validate_credentials(email,password):
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        database="video_dubbing",
+    )
+    cursor = db.cursor()
+    sql = "SELECT * FROM USERS WHERE email = %s AND password = %s"
+    params=(email,password)
+    cursor.execute(sql, params)
+    result = cursor.fetchone()
+    cursor.close()
+    db.close()
+    if result:
+        return True
+    else:
+        return False
+
+def get_videos_info(email:str):
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        database="video_dubbing",
+    )
+    print(email)
+    cursor = db.cursor()
+    sql = "SELECT video_id, video_title FROM video WHERE user_id = %s"
+    params = (email,)
+    cursor.execute(sql, params)
+    result = cursor.fetchall()
+    cursor.close()
+    db.close()
+    data = []
+    for row in result:
+        # Assuming the columns are 'id', 'name', and 'email'
+        row_dict = {'video_id': row[0], 'video_title': row[1]}
+        data.append(row_dict)
+
+    # Return the data as JSON
+    return jsonify(data)

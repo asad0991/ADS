@@ -111,6 +111,9 @@ select{
 <div class="main">
 <br>
 <p><b>Provide the video</b></p>
+  <form style="text-align: end" action="/signout" method="post" enctype="multipart/form-data">
+    <button style="cursor: pointer; margin-right:10px" type="submit">Sign Out</button>
+  </form>
 <p>Upload the video you would like to get Dubbed</p>
     <form method="post" action="/" enctype="multipart/form-data">
 <div class="body1">
@@ -147,7 +150,7 @@ select{
 
   <p class="margin-add" ><b>OR</b></p>
   <p>Provide YouTube link of Video</p>
-  <form method="post" action="/" enctype="multipart/form-data">
+  <form method="post" action="/" >
     <div class="body1" style="margin-bottom: 10px;">
       <select id="original1" name="original" required>
         <option class="or" value="">Original Language</option>
@@ -165,7 +168,7 @@ select{
       </select>
       </div>
   <div class="body1" id="1">
- <input style="padding:0 0 0 10px;" class="link" value="" id="txt-url" name="#" type="text" placeholder="Provide URL Here">
+ <input style="padding:0 0 0 10px;" class="link" value="" id="txt-url" name="link" type="text" placeholder="Provide URL Here">
 <input class=" button input" type="submit" value="Submit">
   </div>
   </form>

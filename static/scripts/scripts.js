@@ -1,10 +1,12 @@
 function appearonclick(){
-  if(document.getElementById('signupform').style.transform== "translateY(-75%)"){
-    document.getElementById('signupform').style.transform= "translateY(0%)"
+  if(document.getElementById('signup-form').style.transform== "translateY(-75%)"){
+    document.getElementById('signup-form').style.transform= "translateY(0%)"
+    document.getElementById('signup-form').style.width= "14rem"
     document.getElementById('login').style.height='27rem';
   }
   else{
-  document.getElementById('signupform').style.transform= "translateY(-75%)";
+  document.getElementById('signup-form').style.transform= "translateY(-75%)";
+  document.getElementById('signup-form').style.width= "40rem"
   document.getElementById('login').style.height='32rem';
 }
 }
@@ -72,3 +74,7 @@ app.controller("myCtrl", function($scope, $http, $window) {
     });
   }
 });
+
+
+
+

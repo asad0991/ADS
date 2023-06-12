@@ -1,6 +1,6 @@
 input_filepath="static/uploads/"
 output_filepath = "~/Transcripts/"
-bucketname = "dubbing-speech-to-text-bucket1"
+bucketname = "dubbing-speech-to-text-bucket2"
 from googletrans import Translator
 from pydub import AudioSegment
 import os
@@ -13,7 +13,6 @@ from ssml_builder.core import Speech
 import db_conn
 import app
 from pytube import YouTube
-from flask import current_app
 
 def download_video(link):
     # create a YouTube object
@@ -23,7 +22,7 @@ def download_video(link):
     stream = yt.streams.get_highest_resolution()
 
     # download the video
-    output_path = "path/to/download/directory"
+    output_path = "static/uploads"
     stream.download(output_path=output_path)
     return yt.title
 
