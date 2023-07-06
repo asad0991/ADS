@@ -1,7 +1,7 @@
 import os
 import db_conn
 from app import app
-from flask import flash, request, redirect, url_for, render_template, session
+from flask import flash, request, redirect, url_for, render_template, session, FLask
 from werkzeug.utils import secure_filename
 import dubber
 from flask import send_file
@@ -185,8 +185,8 @@ def get_videos_info():
     print(data)
     return data
 
-if __name__ == "__main__":
-
-    app.run()
+def create_app():
+    app = FLask(__name__)
+    return app
     #dubber.download_video("https://www.youtube.com/watch?v=ZU0f8_C5Pm0")
     #db_conn.insert_video()
