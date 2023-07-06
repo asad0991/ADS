@@ -11,7 +11,7 @@ import google.cloud.texttospeech as tts
 import moviepy.editor as mp
 from ssml_builder.core import Speech
 import db_conn
-from main import app
+import app
 from pytube import YouTube
 
 def download_video(link):
