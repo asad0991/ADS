@@ -24,7 +24,7 @@ def download_video(link):
     # download the video
     output_path = "static/uploads"
     stream.download(output_path=output_path)
-    return yt.title
+    return yt.title + '.mp4'
 
 def extract_audio(filename):
 
@@ -165,7 +165,7 @@ def text_translation(content,original_language,target_language):
 
     return res
 
-def text_to_audio(voice_name: str,original_language, ssml: str,video_file):
+def text_to_audio(voice_name: str,original_language, ssml: str,video_file, email):
 
     """Setting the configuration for tts API"""
 
@@ -214,12 +214,12 @@ def text_to_audio(voice_name: str,original_language, ssml: str,video_file):
 
     new.write_videofile("static/dubbed/Dubbed-" + video_file, fps=30, threads=1, codec="libx264" )
     with app.app.app_context():
-        video_id=db_conn.insert_video("static/dubbed/Dubbed-" + video_file,original_language, target_language)
+        video_id=db_conn.insert_video("static/dubbed/Dubbed-" + video_file,original_language, target_language, email)
 
     return video_id
 
-def dub_video(filename,original_language,target_langauge):
+def dub_video(filename,original_language,target_langauge, email):
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'google_secret_key.json'
     extract_audio(filename)
-    return text_to_audio(target_langauge,original_language, audio_to_text("motiv.wav",original_language,target_langauge),filename)
+    return text_to_audio(target_langauge,original_language, audio_to_text("motiv.wav",original_language,target_langauge),filename, email)
 

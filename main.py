@@ -4,12 +4,8 @@ from app import app
 from flask import flash, request, redirect, url_for, render_template, session
 from werkzeug.utils import secure_filename
 import dubber
-import emailpart
 from flask import send_file
 import threading
-import requests
-
-
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
@@ -65,13 +61,19 @@ def signout():
 def upload_form():
     if session.get('logged_in'):
         #emailpart.send_email()
-        return render_template('upload.html')
+        if session['alert_message'] != "":
+            mes=session['alert_message']
+            session['alert_message'] = ""
+            return render_template('upload.html', message=mes)
+        else:
+            return render_template('upload.html')
     else:
         return render_template('signin.html')
 
 
 @app.route('/')
 def index():
+    session['alert_message'] = ""
     return render_template('signin.html')
 
 
@@ -103,13 +105,16 @@ def get_and_play_video(videoid):
         return render_template('play.html',videoname=name)
 
 
-@app.route('/', methods=['POST'])
+@app.route('/upload_video', methods=['POST'])
 def upload_video():
+    print("Hello world")
+    session['alert_message'] = ""
     if not session.get('logged_in'):
         # User is logged in
         return render_template('signin.html')
     else:
         file=''
+        filename=''
         if 'link' in request.form:
             link = request.form['link']
             filename = link.split('/')[-1]
@@ -118,36 +123,46 @@ def upload_video():
                 flash('Invalid link')
                 return redirect(request.url)
             else:
-                title=dubber.download_video(link)
+                original_language = request.form['original']
+                Target_language = request.form['target']
+                if original_language.split("-")[0] == Target_language.split("-")[0]:
+                    print("Original language and Target language cannot be same")
+                    session['alert_message'] = "Original language and Target language cannot be same"
+
+                    return redirect('/upload')
+                filename=dubber.download_video(link)
                 print("Hello world")
-                with open("static/uploads/"+title+".mp4", "r", encoding='utf-8') as f:
-                    # read the entire file contents
-                    file = f.read()
+
         else:
             file = request.files['file']
+            filename = secure_filename(file.filename)
 
 
 
 
-        filename = secure_filename(file.filename)
+
         original_language = request.form['original']
         Target_language = request.form['target']
         print(filename)
         print(str(original_language))
         print(str(Target_language))
-        if original_language == Target_language:
+        if original_language.split("-")[0] == Target_language.split("-")[0]:
             print("Original language and Target language cannot be same")
+            session['alert_message']="Original language and Target language cannot be same"
+
+            return redirect('/upload')
         elif filename.endswith('.mp4'):
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            if 'link' not in request.form:
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             background_thread = threading.Thread(target=dubber.dub_video,
-                                                 args=(filename, original_language, Target_language))
+                                                 args=(filename, original_language, Target_language,session['email'] ))
             background_thread.start()
 
-            # return send_file("C:/Users/Nadra/PycharmProjects/pythonProject6/dubbed/" + path, as_attachment=True)
             return render_template('uploadsuccess.html')
         else:
             print('File type not supported')
-            return render_template('upload.html')
+            session['alert_message'] = "File Type Not Supported"
+            return redirect('/upload')
 
 
 
@@ -171,6 +186,7 @@ def get_videos_info():
     return data
 
 if __name__ == "__main__":
-    app.run()
 
+    app.run()
+    #dubber.download_video("https://www.youtube.com/watch?v=ZU0f8_C5Pm0")
     #db_conn.insert_video()

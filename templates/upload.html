@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="static/styles/style.css">
     <script src="static/scripts/scripts.js" charset="utf-8"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+
     <style>
 
     html,body{
@@ -92,8 +94,8 @@ select{
       <a id="menu-button" onclick="menuclick()" class="toggle2" href="#" style="align-self: center; height:fit-content" > <img style="height:25px" src="static/menu-icon.png" alt=""> </a>
 
       <a class="nav-bar-item"style="width:130.08px" href="#">Upload</a>
-      <a href="{{url_for('index')}}" class="logo-ref nav-bar-item" > <img class="logo" src="static/logo.png" alt=""> </a>
-      <a class="nav-bar-item" href="#">Download / Play</a>
+      <a href="#" class="logo-ref nav-bar-item" > <img class="logo" src="static/logo.png" alt=""> </a>
+      <a class="nav-bar-item" href="/dashboard">Download / Play</a>
       <div class="dummy" style="width:25px;">
 
       </div>
@@ -105,7 +107,7 @@ select{
       <div class="mobile-inner">
       <a class="toggle" href="#">Home</a>
       <a class="toggle" href="#">Upload</a>
-      <a class="toggle" href="#">Download / Play</a>
+      <a class="toggle" href="/dashboard">Download / Play</a>
       </div>
     </div>
 <div class="main">
@@ -115,7 +117,7 @@ select{
     <button style="cursor: pointer; margin-right:10px" type="submit">Sign Out</button>
   </form>
 <p>Upload the video you would like to get Dubbed</p>
-    <form method="post" action="/" enctype="multipart/form-data">
+    <form method="post" action="/upload_video" enctype="multipart/form-data">
 <div class="body1">
       <select id="original" name="original" required>
         <option class="or" value="">Original Language</option>
@@ -150,7 +152,7 @@ select{
 
   <p class="margin-add" ><b>OR</b></p>
   <p>Provide YouTube link of Video</p>
-  <form method="post" action="/" >
+  <form method="post" action="/upload_video" enctype="multipart/form-data" >
     <div class="body1" style="margin-bottom: 10px;">
       <select id="original1" name="original" required>
         <option class="or" value="">Original Language</option>
@@ -173,5 +175,13 @@ select{
   </div>
   </form>
 </div>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+
+    if( '{{message}}' != ""){
+      alert('{{message}}')
+      }
+    });
+    </script>
   </body>
 </html>

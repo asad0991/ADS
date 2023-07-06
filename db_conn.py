@@ -6,7 +6,7 @@ from flask import jsonify
 def generate_hex_string(length):
     return ''.join(random.choices(string.hexdigits, k=length))
 
-def insert_video(video_path,original_language,target_language):
+def insert_video(video_path,original_language,target_language, email):
     # connect to the MySQL database
     db = mysql.connector.connect(
         host="localhost",
@@ -31,13 +31,13 @@ def insert_video(video_path,original_language,target_language):
 
     filename = video_path.rsplit('/', 1)[-1]
     # prepare the INSERT statement
-    sql = "INSERT INTO video (video_id, video, video_title, original_language, target_language) VALUES (%s,%s,%s, %s, %s)"
-    params = (video_id, video_data,filename, original_language, target_language)
+    sql = "INSERT INTO video (video_id, video, video_title, original_language, target_language, USER_ID) VALUES (%s,%s,%s, %s, %s, %s)"
+    params = (video_id, video_data,filename, original_language, target_language, email)
 
     # create a cursor object and execute the statement
 
     cursor.execute(sql, params)
-    emailpart.send_email(video_id)
+    emailpart.send_email(video_id, email)
     # commit the transaction and close the cursor and database connection
     db.commit()
     cursor.close()

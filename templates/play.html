@@ -13,9 +13,9 @@
     <div class="nav-bar">
       <a id="menu-button" onclick="menuclick()" class="toggle2" href="#" style="align-self: center; height:fit-content" > <img style="height:25px" src="{{ url_for('static', filename='menu-icon.png') }}" alt=""> </a>
 
-      <a class="nav-bar-item"style="width:130.08px" href="upload.html">Upload</a>
+      <a class="nav-bar-item"style="width:130.08px" href="/upload">Upload</a>
       <a href="#" class="logo-ref nav-bar-item" > <img class="logo" src="{{ url_for('static', filename='logo.png') }}" alt=""> </a>
-      <a class="nav-bar-item" href="#">Download / Play</a>
+      <a class="nav-bar-item" href="/dashboard">Download / Play</a>
       <div class="dummy" style="width:25px;">
 
       </div>
@@ -26,13 +26,16 @@
       <a id="x-button" onclick="menuoff()" class="toggle2" href="#" style="height:fit-content; padding-top:2rem;" > <img style="height:25px" src="{{ url_for('static', filename='x.png') }}" alt=""> </a>
       <div class="mobile-inner">
       <a class="toggle" href="#">Home</a>
-      <a class="toggle" href="#">Upload</a>
-      <a class="toggle" href="#">Download / Play</a>
+      <a class="toggle" href="/upload">Upload</a>
+      <a class="toggle" href="/dashboard">Download / Play</a>
 
 
       </div>
 
     </div>
+    <form style="position: absolute;justify-content: end; display:flex; width:100%; margin-top: 7rem;" action="/signout" method="post" enctype="multipart/form-data">
+    <button style="cursor: pointer; margin-right:1rem" type="submit">Sign Out</button>
+  </form>
     <div class="video-container">
 
        <video controls>

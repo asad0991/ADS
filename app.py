@@ -1,6 +1,5 @@
 from flask import Flask
 from datetime import timedelta
-
 UPLOAD_FOLDER = 'static/uploads/'
 
 app = Flask(__name__)
@@ -12,3 +11,4 @@ app.config['MAIL_USERNAME'] = 'automatic.dubbing.software@gmail.com'
 app.config['MAIL_PASSWORD'] = 'lhtoyomijxunfwve'
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
+
