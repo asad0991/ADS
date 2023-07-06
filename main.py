@@ -1,11 +1,24 @@
 import os
 import db_conn
-from app import app
 from flask import flash, request, redirect, url_for, render_template, session
 from werkzeug.utils import secure_filename
 import dubber
 from flask import send_file
 import threading
+from flask import Flask
+from datetime import timedelta
+UPLOAD_FOLDER = 'static/uploads/'
+
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = 'automatic.dubbing.software@gmail.com'
+app.config['MAIL_PASSWORD'] = 'lhtoyomijxunfwve'
+app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
