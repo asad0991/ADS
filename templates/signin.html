@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="static/styles/style.css">
+    <script src="static/scripts/scripts.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- Add jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Add jQuery UI library -->
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
+  <!-- Add jQuery UI CSS -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+  
+
+
+    <title>Index</title>
+    <script>
+    $(function() {
+      var countries = [
+        "Australia", "Brazil", "Canada", "China", "France", "Germany", "India", "Italy", "Japan", "Mexico",
+        "Netherlands", "Pakistan", "Russia", "South Korea", "Spain", "Sweden", "Switzerland", "Turkey",
+        "United Kingdom", "United States"
+      ];
+
+      $("#country").autocomplete({
+        source: function(request, response) {
+          var filtered = $.grep(countries, function(item) {
+            return item.toLowerCase().startsWith(request.term.toLowerCase());
+          });
+          response(filtered);
+        },
+        select: function(event, ui) {
+          var selectedCountry = ui.item.value;
+
+          if (countries.includes(selectedCountry)) {
+            // Valid country selected
+            console.log("Selected country: " + selectedCountry);
+            $("#country").removeClass("invalid-input"); // Remove the CSS class if previously marked invalid
+
+          } else {
+            // Invalid country selected
+            console.log("Invalid country selected: " + selectedCountry);
+            $("#country").addClass("invalid-input"); // Add the CSS class to mark the input field as invalid
+            $("#country").val(""); // Clear the input field
+          }
+          return false;
+        }
+      });
+      $("#signup-form").submit(function(event) {
+    var selectedCountry = $("#country").val();
+
+    if (countries.includes(selectedCountry)) {
+      // Valid country selected
+      console.log("Selected country: " + selectedCountry);
+      $("#country").removeClass("invalid-input");
+    } else {
+      // Invalid country selected
+      console.log("Invalid country selected: " + selectedCountry);
+      $("#country").addClass("invalid-input");
+      event.preventDefault(); // Prevent form submission
+    }
+  });
+    });
+</script>
+  </head>
+  <body>
+<div class="nav-bar">
+  <a id="menu-button" onclick="menuclick()" class="toggle2" href="#" style="align-self: center; height:fit-content" > <img style="height:25px" src="static/menu-icon.png" alt=""> </a>
+
+  <a class="nav-bar-item"style="width:130.08px" href="#">Upload</a>
+  <a href="#" class="logo-ref nav-bar-item" > <img class="logo" src="static/logo.png" alt=""> </a>
+  <a class="nav-bar-item" href="#">Download / Play</a>
+  <div class="dummy" style="width:25px;">
+
+  </div>
+
+</div>
+
+<div id="mobile" class="nav-bar mobile">
+  <a id="x-button" onclick="menuoff()" class="toggle2" href="#" style="height:fit-content; padding-top:2rem;" > <img style="height:25px" src="static/x.png" alt=""> </a>
+  <div class="mobile-inner">
+  <a class="toggle" href="#">Home</a>
+  <a class="toggle" href="#">Upload</a>
+  <a class="toggle" href="#">Download / Play</a>
+
+
+  </div>
+</div>
+    <div class="login-wrapper">
+
+    <div id="login" class="login">
+      <h3 class="heading" >Video Dubbing</h3>
+      <h4 class="login-heading">Login Here</h4>
+      <form class="login-form" action="/signin" method="post">
+        <input type="text" name="email" value="" placeholder="Email">
+        <br>
+        <input type="text" name="password" value="" placeholder="Password">
+        <br>
+        <button class="login-button" type="submit" name="submit">Login</button>
+      </form>
+      <div class="signup" id="signup-form">
+          <h4 class="signup-heading" onclick="appearonclick()" >Sign Up</h4>
+        <form class="signup-form" action="/signup" method="post" enctype="multipart/form-data">
+          <input type="email" name="email" value="" placeholder="Email">
+          <input type="text" name="name" value="" placeholder="Name">
+          <br>
+          <input type="text" id="country" name="country" placeholder="Enter your country">
+          <input type="text" id="phone" name="phone" placeholder="Enter your mobile number">
+
+          <br>
+          <input type="password" name="password" value="" placeholder="Password">
+          <input type="text" name="confirm-password" value="" placeholder=" Confirm Password">
+          <br>
+          <button class="signupbutton" type="submit" name="submit">Sign Up</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="static/styles/style.css">
+
+    <title>Dashboard</title>
+
+     <script src="static/scripts/scripts.js" charset="utf-8"></script>
+
+</head>
+<body ng-app="dashboardApp" style="justify-content: space-between" >
+<div class="nav-bar">
+  <a id="menu-button" onclick="menuclick()" class="toggle2" href="#" style="align-self: center; height:fit-content" > <img style="height:25px" src="static/menu-icon.png" alt=""> </a>
+
+  <a class="nav-bar-item"style="width:130.08px" href="/upload">Upload</a>
+  <a href="#" class="logo-ref nav-bar-item" > <img class="logo" src="static/logo.png" alt=""> </a>
+  <a class="nav-bar-item" href="#">Download / Play</a>
+  <div class="dummy" style="width:25px;">
+
+  </div>
+
+</div>
+
+<div id="mobile" class="nav-bar mobile">
+  <a id="x-button" onclick="menuoff()" class="toggle2" href="#" style="height:fit-content; padding-top:2rem;" > <img style="height:25px" src="static/x.png" alt=""> </a>
+  <div class="mobile-inner">
+  <a class="toggle" href="#">Home</a>
+  <a class="toggle" href="#">Upload</a>
+  <a class="toggle" href="#">Download / Play</a>
+
+
+  </div>
+</div>
+
+<div class="dashboard" ng-controller="video_info">
+    <div class="one-vid" ng-repeat="info in infos">
+    <a style="text-decoration: none; color: white" href="/video/{{    '{{info.video_id}}'    }}">
+    <div class="image-container">
+  <img src="static/thumbnail.jpeg" alt="Image">
+  <div class="play-icon"></div>
+    </div>
+    <p  ng-bind="info.video_title"></p>
+    </a>
+    </div>
+    </div>
+<form style="margin-top: 7rem; margin-right: 4rem;" action="/signout" method="post" enctype="multipart/form-data">
+    <button style="cursor: pointer; margin-right:10px" type="submit">Sign Out</button>
+  </form>
+    <script>
+      console.log("Hello")
+    var app2 = angular.module('dashboardApp', []);
+    app2.controller('video_info', function($scope, $http) {
+        $scope.data = []
+        console.log("in controller")
+      $http({
+          method: 'GET',
+      url: '/getvideosinfo'
+      }).then(function (response) {
+          $scope.infos = response.data
+          console.log($scope.infos)
+            $scope.get_id = function(video_title){
+              for(var val in $scope.infos){
+                  if($scope.infos[val].video_title == video_title)
+                  {
+                      console.log($scope.infos[val].video_id)
+                      return $scope.infos[val].video_id;
+                  }
+              }
+
+            }
+      });
+
+    });
+  </script>
+</body>
+</html>
