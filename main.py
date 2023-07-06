@@ -1,7 +1,7 @@
 import os
 import db_conn
 from app import app
-from flask import flash, request, redirect, url_for, render_template, session, FLask
+from flask import flash, request, redirect, url_for, render_template, session
 from werkzeug.utils import secure_filename
 import dubber
 from flask import send_file
@@ -175,7 +175,7 @@ def signup():
     country = request.form['country']
     phone = request.form['phone']
     password = request.form['password']
-    cpassword = request.form['confirm-password']
+
     db_conn.user_sign_up(email, name, phone, password, country)
     return 'Form submitted successfully'
 
@@ -185,8 +185,4 @@ def get_videos_info():
     print(data)
     return data
 
-def create_app():
-    app = FLask(__name__)
-    return app
-    #dubber.download_video("https://www.youtube.com/watch?v=ZU0f8_C5Pm0")
-    #db_conn.insert_video()
+
