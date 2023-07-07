@@ -185,4 +185,3 @@ def get_videos_info():
     data = db_conn.get_videos_info(session.get('email'))
     print(data)
     return data
-

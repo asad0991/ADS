@@ -3,6 +3,7 @@ import random
 import string
 import emailpart
 from flask import jsonify
+import os
 def generate_hex_string(length):
     return ''.join(random.choices(string.hexdigits, k=length))
 
@@ -58,7 +59,9 @@ def get_video(video_id):
     data=cursor.fetchone()
     cursor.close()
     db.close()
-    with open(data[1], 'wb') as f:
+
+    file_path = os.path.join("static/dubbed", data[1])
+    with open(file_path, 'wb') as f:
         f.write(data[0])
 
     f.close()
