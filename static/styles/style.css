@@ -174,7 +174,7 @@ video {
     }
   .dashboard{
     margin: 8rem 0rem;
-    display:flex;
+    display:grid;
   }
   .thumbnail{
     width: 100%;
