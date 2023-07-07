@@ -9,9 +9,10 @@ def generate_hex_string(length):
 def insert_video(video_path,original_language,target_language, email):
     # connect to the MySQL database
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
+        host="asad0991.mysql.pythonanywhere-services.com",
+        user="asad0991",
         database="video_dubbing",
+        password="Asad123@"
     )
     cursor = db.cursor()
     video_id = generate_hex_string(8)
@@ -46,9 +47,10 @@ def insert_video(video_path,original_language,target_language, email):
 
 def get_video(video_id):
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
+        host="asad0991.mysql.pythonanywhere-services.com",
+        user="asad0991",
         database="video_dubbing",
+        password="Asad123@"
     )
     cursor = db.cursor()
     query = "SELECT VIDEO,VIDEO_TITLE FROM VIDEO WHERE VIDEO_ID = %s"
@@ -65,9 +67,10 @@ def get_video(video_id):
 def user_sign_up(email,name,phone,password, country):
     print("hello")
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
+        host="asad0991.mysql.pythonanywhere-services.com",
+        user="asad0991",
         database="video_dubbing",
+        password="Asad123@"
     )
     print("Connection established .... i guess")
     cursor = db.cursor()
@@ -83,9 +86,10 @@ def user_sign_up(email,name,phone,password, country):
 
 def validate_credentials(email,password):
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
+        host="asad0991.mysql.pythonanywhere-services.com",
+        user="asad0991",
         database="video_dubbing",
+        password="Asad123@"
     )
     cursor = db.cursor()
     sql = "SELECT * FROM USERS WHERE email = %s AND password = %s"
@@ -101,9 +105,10 @@ def validate_credentials(email,password):
 
 def get_videos_info(email:str):
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
+        host="asad0991.mysql.pythonanywhere-services.com",
+        user="asad0991",
         database="video_dubbing",
+        password="Asad123@"
     )
     print(email)
     cursor = db.cursor()
