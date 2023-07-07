@@ -174,7 +174,7 @@ video {
     }
   .dashboard{
     margin: 8rem 0rem;
-    display:grid;
+    display:flex;
   }
   .thumbnail{
     width: 100%;
@@ -213,6 +213,9 @@ video {
 }
 
 @media screen and (max-width:767px) {
+  .dashboard{
+    display:grid;
+  }
   .signup-form{
     margin-top:0
   }
