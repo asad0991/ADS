@@ -17,7 +17,7 @@ def insert_video(video_path,original_language,target_language, email):
     )
     cursor = db.cursor()
     video_id = generate_hex_string(8)
-    sql = "SELECT * FROM VIDEO WHERE VIDEO_ID = %s"
+    sql = "SELECT * FROM video WHERE VIDEO_ID = %s"
     params = (video_id,)
     cursor.execute(sql, params)
     row = cursor.fetchone()
