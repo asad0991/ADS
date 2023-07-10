@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="static/styles/style.css">
-    <script src="static/scripts/scripts.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="static/scripts/scripts.js" charset="utf-8"></script>
+
     <!-- Add jQuery library -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -20,6 +21,12 @@
 
     <title>Index</title>
     <script>
+      var signin = angular.module("myApp", []);
+      signin.controller('MyController', function($scope) {
+  $scope.passwordsMatch = function() {
+    return $scope.password === $scope.confirmPassword;
+  };
+});
     $(function() {
       var countries = [
         "Australia", "Brazil", "Canada", "China", "France", "Germany", "India", "Italy", "Japan", "Mexico",
@@ -68,7 +75,7 @@
     });
 </script>
   </head>
-  <body>
+  <body ng-app="myApp">
 <div class="nav-bar">
   <a id="menu-button" onclick="menuclick()" class="toggle2" href="#" style="align-self: center; height:fit-content" > <img style="height:25px" src="static/menu-icon.png" alt=""> </a>
 
@@ -97,26 +104,28 @@
       <h3 class="heading" >Video Dubbing</h3>
       <h4 class="login-heading">Login Here</h4>
       <form class="login-form" action="/signin" method="post">
-        <input type="text" name="email" value="" placeholder="Email">
+        <input type="text" name="email" value="" placeholder="Email" required>
         <br>
-        <input type="password" name="password" value="" placeholder="Password">
+        <input type="password" name="password" value="" placeholder="Password" required>
         <br>
         <button class="login-button" type="submit" name="submit">Login</button>
       </form>
-      <div class="signup" id="signup-form">
+      <div ng-controller="MyController" class="signup" id="signup-form">
           <h4 class="signup-heading" onclick="appearonclick()" >Sign Up</h4>
         <form class="signup-form" action="/signup" method="post" enctype="multipart/form-data">
-          <input type="email" name="email" value="" placeholder="Email">
-          <input type="text" name="name" value="" placeholder="Name">
+          <input type="email" name="email" value="" placeholder="Email" required>
+          <input type="text" name="name" value="" placeholder="Name" required>
           <br>
-          <input type="text" id="country" name="country" placeholder="Enter your country">
-          <input type="text" id="phone" name="phone" placeholder="Enter your mobile number">
+          <input type="text" id="country" name="country" placeholder="Enter your country" required>
+          <input type="text" id="phone" name="phone" placeholder="Enter your mobile number" required>
 
           <br>
-          <input type="password" name="password" value="" placeholder="Password">
-          <input type="text" name="confirm-password" value="" placeholder=" Confirm Password">
+          <input type="password" ng-model="password" name="password" value="" placeholder="Password" required>
+          <input type="password" ng-model="confirmPassword" name="confirm-password" value="" placeholder=" Confirm Password" required>
           <br>
-          <button class="signupbutton" type="submit" name="submit">Sign Up</button>
+          <span ng-show="!passwordsMatch()">Passwords do not match</span>
+          <br>
+          <button ng-disabled="!passwordsMatch()" class="signupbutton" type="submit" name="submit">Sign Up</button>
         </form>
       </div>
     </div>

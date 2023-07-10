@@ -6,7 +6,9 @@ from werkzeug.utils import secure_filename
 import dubber
 from flask import send_file
 import threading
+import re
 adsapp=app
+
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
@@ -18,7 +20,7 @@ def signin():
             # Successful sign-in, set the session as permanent (persistent) and store the sign-in status
             session.permanent = True
             session['logged_in'] = True
-
+            session['alert_message'] = ""
             # Redirect to a different page
             return redirect('/dashboard')
         else:
@@ -33,6 +35,7 @@ def signin():
 @app.route('/dashboard')
 def dashboard():
     if session.get('logged_in'):
+
         # User is logged in
         return render_template('dashboard.html')
     else:
@@ -132,6 +135,10 @@ def upload_video():
 
                     return redirect('/upload')
                 filename=dubber.download_video(link)
+                pattern = r'[!@#$%^&*()<>?/]|'
+
+                # Remove unwanted characters using regex substitution
+                filename = re.sub(pattern, '', filename)
                 print("Hello world")
 
         else:
@@ -159,7 +166,7 @@ def upload_video():
                                                  args=(filename, original_language, Target_language,session['email'] ))
             background_thread.start()
 
-            return render_template('uploadsuccess.html')
+            return render_template('uploadsuccess.html', message="Your Video Will Be Dubbed Shortly")
         else:
             print('File type not supported')
             session['alert_message'] = "File Type Not Supported"
@@ -176,12 +183,15 @@ def signup():
     country = request.form['country']
     phone = request.form['phone']
     password = request.form['password']
-
+    cpassword=request.form['confirm-password']
+    
     db_conn.user_sign_up(email, name, phone, password, country)
-    return 'Form submitted successfully'
+    return render_template('uploadsuccess.html', message="Account Created Successfully")
 
 @app.route('/getvideosinfo', methods=['GET', 'POST'])
 def get_videos_info():
     data = db_conn.get_videos_info(session.get('email'))
     print(data)
     return data
+
+app.run()
